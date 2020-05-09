@@ -18,28 +18,34 @@ data Auto = Auto {
 
 --PUNTO 1
 costoReparacion :: Auto -> Int
-costoReparacion (patente, _,_,_,_) | length patente > 7 = 12500
-                     | length patente == 6 = calculoPatental
-                     | (dosPatente patente) > "DJ" && dosPatente patente) < "NB" = calculoPatental
-                     |otherwise = 15000
-                     
-dosPatente patente = take 2 patente
-patente Auto = patente
+costoReparacion Auto  | length (patente Auto) > 7 = 12500
+                      | length (patente Auto) == 6  && patenteEntre  = calculoPatental
+                      | otherwise = 15000
+
+patenteEntre :: String -> Bool
+patenteEntre patente = patente > "DJ" &&  patente < "NB"          
 
 calculoPatental :: Auto -> Int                     
-calculoPatental (patente,_,_,_,_) | last patente == 4 = 3000* length patente
+calculoPatental Auto | last (patente Auto) == 4 = 3000* length (patente Auto)
                      | otherwise = 20000
             
-
+ 
 --PUNTO 2, parte 1
 espeligroso:: Auto -> Bool
-espeligroso (_,desgasteLlantas,_,_,_) = (>0.5).(head desgasteLlantas)
+espeligroso = (>0.5).(head desgasteLlantas)  
 
 --PUNTO 2, parte 2
 
 --PUNTO 3, parte 1
-alfa (_,_,rpm,_,_)  | rpm < 2000 = rpm 
-                    | otherwise = rpm == 2000
-bravo (_,desgasteLlantas,_,_,_)  = desgasteLlantas == [0,0,0,0]
+}
+ personalAlfa :: Auto -> Auto
+ personalAlfa Auto | (rpm Auto) < 2000 = Auto
+                   | otherwise = patente desgasteLlantas 2000 temperaturaAgua ultimoArreglo
+
+personalBravo :: Auto -> Auto
+personalBravo Auto = patente [0,0,0,0] rpm temperaturaAgua ultimoArreglo
+
+personalCharly :: Auto -> Auto
+personalCharly Auto = 
 
 --PUNTO 3, parte 2
