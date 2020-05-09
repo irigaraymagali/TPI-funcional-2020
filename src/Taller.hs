@@ -46,6 +46,6 @@ personalBravo :: Auto -> Auto
 personalBravo Auto = patente [0,0,0,0] rpm temperaturaAgua ultimoArreglo
 
 personalCharly :: Auto -> Auto
-personalCharly Auto = 
+personalCharly Auto = personalAlfa && personalBravo
 
 --PUNTO 3, parte 2
