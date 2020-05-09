@@ -38,15 +38,15 @@ necesitaRevision = (<=2015).(anio).(ultimoArreglo)
 
 --PUNTO 3, parte 1
 
- personalAlfa :: Auto -> Auto
- personalAlfa Auto | (rpm Auto) < 2000 = Auto
-                   | otherwise = patente desgasteLlantas 2000 temperaturaAgua ultimoArreglo
+personalAlfa :: Auto -> Auto
+personalAlfa Auto | (rpm Auto) < 2000 = Auto
+                  | otherwise = patente desgasteLlantas 2000 temperaturaAgua ultimoArreglo
 
 personalBravo :: Auto -> Auto
 personalBravo Auto = patente [0,0,0,0] rpm temperaturaAgua ultimoArreglo
 
 personalCharly :: Auto -> Auto
-personalCharly Auto = 
+personalCharly Auto = personalAlfa && personalBravo
 
 
 --PUNTO 3, parte 2
