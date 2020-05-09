@@ -50,8 +50,11 @@ personalCharly Auto = personalAlfa && personalBravo
 
 
 --PUNTO 3, parte 2
+
 personalTango :: Auto -> Auto
 personalTango Auto = Auto
 
 personalLima :: Auto -> Auto
-personalLima 
+personalLima Auto = Auto {desgasteLlantas = [0,0,_,_]}
+
+personalZulu :: Auto -> Auto
