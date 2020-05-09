@@ -29,15 +29,13 @@ calculoPatental :: Auto -> Int
 calculoPatental Auto | last (patente Auto) == 4 = 3000* length (patente Auto)
                      | otherwise = 20000
             
- 
---PUNTO 2, parte 1
-espeligroso:: Auto -> Bool
-espeligroso = (>0.5).(head desgasteLlantas)  
 
 --PUNTO 2, parte 2
+necesitaRevision :: Auto -> Bool
+necesitaRevision = (<=2015).(anio).(ultimoArreglo)
 
 --PUNTO 3, parte 1
-}
+
  personalAlfa :: Auto -> Auto
  personalAlfa Auto | (rpm Auto) < 2000 = Auto
                    | otherwise = patente desgasteLlantas 2000 temperaturaAgua ultimoArreglo
@@ -46,6 +44,12 @@ personalBravo :: Auto -> Auto
 personalBravo Auto = patente [0,0,0,0] rpm temperaturaAgua ultimoArreglo
 
 personalCharly :: Auto -> Auto
-personalCharly Auto = personalAlfa && personalBravo
+personalCharly Auto = 
+
 
 --PUNTO 3, parte 2
+personalTango :: Auto -> Auto
+personalTango Auto = Auto
+
+personalLima :: Auto -> Auto
+personalLima 
