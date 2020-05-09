@@ -29,6 +29,8 @@ calculoPatental :: Auto -> Int
 calculoPatental Auto | last (patente Auto) == 4 = 3000* length (patente Auto)
                      | otherwise = 20000
             
+--PUNTO 2, parte 1
+esPeligroso = (>0.5).(head desgasteLlantas)
 
 --PUNTO 2, parte 2
 necesitaRevision :: Auto -> Bool
