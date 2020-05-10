@@ -37,20 +37,17 @@ necesitaRevision :: Auto -> Bool
 necesitaRevision = (<=2015).(anio).(ultimoArreglo)
 
 --PUNTO 3, parte 1
-
 personalAlfa :: Auto -> Auto
 personalAlfa Auto | (rpm Auto) < 2000 = Auto
-                  | otherwise = patente desgasteLlantas 2000 temperaturaAgua ultimoArreglo
-
+                  | otherwise = Auto {rpm = 2000 }
+                      
 personalBravo :: Auto -> Auto
-personalBravo Auto = patente [0,0,0,0] rpm temperaturaAgua ultimoArreglo
+personalBravo Auto = Auto {desgasteLlantas = [0,0,0,0]}
 
 personalCharly :: Auto -> Auto
 personalCharly Auto = personalAlfa && personalBravo
 
-
 --PUNTO 3, parte 2
-
 personalTango :: Auto -> Auto
 personalTango Auto = Auto
 
