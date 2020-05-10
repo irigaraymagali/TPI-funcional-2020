@@ -7,7 +7,7 @@ type Fecha = (Int, Int, Int)
 -- Definiciones base
 anio :: Fecha -> Int
 anio (_, _, year) = year
- 
+
 data Auto = Auto {
  patente :: Patente,
  desgasteLlantas :: [Desgaste],
@@ -45,13 +45,17 @@ personalBravo :: Auto -> Auto
 personalBravo Auto = Auto {desgasteLlantas = [0,0,0,0]}
 
 personalCharly :: Auto -> Auto
-personalCharly Auto = personalAlfa && personalBravo
+personalCharly = personalAlfa.personalBravo
 
 --PUNTO 3, parte 2
+
 personalTango :: Auto -> Auto
 personalTango Auto = Auto
+
 
 personalLima :: Auto -> Auto
 personalLima Auto = Auto {desgasteLlantas = [0,0,_,_]}
 
 personalZulu :: Auto -> Auto
+
+
