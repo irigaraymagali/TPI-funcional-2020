@@ -48,14 +48,18 @@ personalCharly :: Auto -> Auto
 personalCharly = personalAlfa.personalBravo
 
 --PUNTO 3, parte 2
-
 personalTango :: Auto -> Auto
 personalTango Auto = Auto
 
+arregloLlantas :: [Desgaste] -> [Desgaste]
+arregloLlantas = [0,0,_,_]
 
 personalLima :: Auto -> Auto
-personalLima Auto = Auto {desgasteLlantas = [0,0,_,_]}
+personalLima Auto = Auto {desgasteLlantas = arregloLlantas}
+
+trabajoZulu :: Auto -> Auto
+trabajoZulu Auto = Auto {temperaturaAgua = 90}
 
 personalZulu :: Auto -> Auto
-
+personalZulu = personalLima.trabajoZulu
 
