@@ -19,12 +19,17 @@ data Auto = Auto {
 
 --PUNTO 1
 costoReparacion :: Auto -> Int
-costoReparacion auto  | length (patente auto) > 7 = 12500
-                      | length (patente auto) == 6  && patenteEntre  = calculoPatental
+costoReparacion auto  | patenteVieja auto = 12500
+                      | patenteNueva auto  && patenteEntreDJyNB (patente auto) = calculoPatental auto
                       | otherwise = 15000
 
-patenteEntre :: String -> Bool
-patenteEntre patente = patente > "DJ" &&  patente < "NB"          
+patenteVieja :: Auto -> Bool
+patenteVieja auto = (length.patente) auto == 7
+patenteNueva :: Auto -> Bool
+patenteNueva auto = (length.patente) auto == 6
+
+patenteEntreDJyNB :: String -> Bool
+patenteEntreDJyNB patente = patente > "DJ" &&  patente < "NB"          
 
 calculoPatental :: Auto -> Int                     
 calculoPatental auto | last (patente auto) == 4 = 3000* length (patente auto)

@@ -37,34 +37,34 @@ main = hspec $ do
       it "anio de una fecha" $ do
          anio (1,1,2020) `shouldBe` 2020
    describe "Costo de reparacion de un auto" $ do
-      it "Un auto con patente AB808RD costara $12500 arreglarlo " $ do
+      it "Un auto con patente vieja costara $12500 arreglarlo " $ do
          costoReparacion auto1 `shouldBe` 12500
-      it "Un auto con patente EJS363 costara $20000 arreglarlo " $ do
+      it "Un auto con patente nueva costara $20000 arreglarlo " $ do
          costoReparacion auto2 `shouldBe` 20000
-      it "Un auto con patente EJS364 costara $18000 arreglarlo " $ do
+      it "Un auto con patente nueva y terminada en 4 costara $18000 arreglarlo " $ do
          costoReparacion auto3 `shouldBe` 18000
       it "Un auto con patente ABC123 costara $15000 arreglarlo " $ do
          costoReparacion auto4 `shouldBe` 15000
    describe "Auto peligroso" $ do
-      it "El auto1 es peligroso " $ do
-         auto1 `shouldSatisfy `esPeligroso
-      it "El auto2 no es peligroso " $ do
-         auto2 `shouldNotSatisfy `esPeligroso
+      it "Un auto con la primera llanta poca desgastada no es peligroso" $ do
+         auto1 `shouldSatisfy` esPeligroso
+      it "Un auto con la primera llanta muy desgastada es peligroso" $ do
+         auto2 `shouldNotSatisfy` esPeligroso
    describe "Auto necesita revision" $ do
       it "El auto1 necesita revision " $ do
          auto1 `shouldSatisfy `necesitaRevision   
       it "El auto2 no necesita revision " $ do
          auto2 `shouldNotSatisfy `necesitaRevision   
    describe "Personal tecnico encargado de las reparaciones" $ do
-      it "Alfa si el auto regula a 1000 vueltas lo deja como esta" $ do
+      it "Alfa deja como esta a un auto con rpm menor que 2000" $ do
           personalAlfa auto1 `shouldBe` auto1
-      it "Alfa si el auto regula a 5000 vueltas lo deja a 2000 vueltas" $ do
+      it "Alfa regula a 2000 vueltas si el auto regula a mas de 2000" $ do
           personalAlfa auto2 `shouldBe` auto2b
       it "Bravo deja las llantas sin desgaste" $ do
           personalBravo auto1 `shouldBe` auto1b
-      it "Charly deja las llantas sin desgaste y si el auto regula a 1000 vueltas lo deja como esta" $ do
+      it "Charly deja las llantas sin desgaste y deja como esta a un auto con rpm menor que 2000" $ do
           personalCharly auto1 `shouldBe` auto1b
-      it "Charly deja las llantas sin desgaste y si el auto regula a 5000 vueltas lo deja a 2000 vueltas" $ do
+      it "Charly deja las llantas sin desgaste y regula a 2000 vueltas si el auto regula a mas de 2000" $ do
           personalCharly auto3 `shouldBe` auto3b
       it "Tango deja los autos tal cual llegan"
          personalTango auto5 `shouldBe` auto5
