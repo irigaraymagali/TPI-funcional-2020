@@ -39,11 +39,11 @@ main = hspec $ do
    describe "Costo de reparacion de un auto" $ do
       it "Un auto con patente vieja costara $12500 arreglarlo " $ do
          costoReparacion auto1 `shouldBe` 12500
-      it "Un auto con patente nueva costara $20000 arreglarlo " $ do
+      it "Un auto con patente nueva y que esta entre DJ y NB costara $20000 arreglarlo " $ do
          costoReparacion auto2 `shouldBe` 20000
-      it "Un auto con patente nueva y terminada en 4 costara $18000 arreglarlo " $ do
+      it "Un auto con patente nueva, que está entre DJ y NB, y termina en 4 costara $18000 arreglarlo " $ do
          costoReparacion auto3 `shouldBe` 18000
-      it "Un auto con patente ABC123 costara $15000 arreglarlo " $ do
+      it "Un auto con patente nueva y que no está entre DJ y NB costara $15000 arreglarlo " $ do
          costoReparacion auto4 `shouldBe` 15000
    describe "Auto peligroso" $ do
       it "Un auto con la primera llanta poca desgastada no es peligroso" $ do
@@ -51,9 +51,9 @@ main = hspec $ do
       it "Un auto con la primera llanta muy desgastada es peligroso" $ do
          auto2 `shouldNotSatisfy` esPeligroso
    describe "Auto necesita revision" $ do
-      it "El auto1 necesita revision " $ do
+      it "El auto1 necesita revision porque no se revisa desde antes de 2015" $ do
          auto1 `shouldSatisfy `necesitaRevision   
-      it "El auto2 no necesita revision " $ do
+      it "El auto2 no necesita revision porque se revisó después de 2015 " $ do
          auto2 `shouldNotSatisfy `necesitaRevision   
    describe "Personal tecnico encargado de las reparaciones" $ do
       it "Alfa deja como esta a un auto con rpm menor que 2000" $ do
@@ -66,9 +66,9 @@ main = hspec $ do
           personalCharly auto1 `shouldBe` auto1b
       it "Charly deja las llantas sin desgaste y regula a 2000 vueltas si el auto regula a mas de 2000" $ do
           personalCharly auto3 `shouldBe` auto3b
-      it "Tango deja los autos tal cual llegan"
+      it "Tango deja los autos como llegan" $ do
          personalTango auto5 `shouldBe` auto5
-      it "Lima deja las dos primeras llantas sin desgaste y las otras dos como estaban"
+      it "Lima deja las dos primeras llantas sin desgaste y las otras dos como estaban" $ do
          personalLima auto5 `shouldBe` auto5b
-      it "Zulu deja las dos primeras llantas arregladas y la temperatura a 90"
+      it "Zulu deja las dos primeras llantas sin desgaste y la temperatura a 90" $ do
          personalZulu auto5 `shouldBe` auto5c

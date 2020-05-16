@@ -28,7 +28,7 @@ patenteVieja auto = (length.patente) auto == 7
 patenteNueva :: Auto -> Bool
 patenteNueva auto = (length.patente) auto == 6
 
-patenteEntreDJyNB :: String -> Bool
+patenteEntreDJyNB :: Patente -> Bool
 patenteEntreDJyNB patente = patente > "DJ" &&  patente < "NB"          
 
 calculoPatental :: Auto -> Int                     
@@ -41,7 +41,7 @@ esPeligroso = (>0.5).head.desgasteLlantas
 
 --PUNTO 2, parte 2
 necesitaRevision :: Auto -> Bool
-necesitaRevision = (<=2015).(anio).(ultimoArreglo)
+necesitaRevision = (>=2015).anio.ultimoArreglo
 
 --PUNTO 3, parte 1
 personalAlfa :: Mecanico
@@ -58,15 +58,15 @@ personalCharly = personalAlfa.personalBravo
 personalTango :: Mecanico
 personalTango auto = auto
 
-arregloLlantas :: [Desgaste] -> [Desgaste]
-arregloLlantas = [0,0,_,_]
+arregloDosLlantas :: [Desgaste] -> [Desgaste]
+arregloDosLlantas = [0,0,_,_]
 
 personalLima :: Mecanico
-personalLima auto = auto {desgasteLlantas = arregloLlantas}
+personalLima auto = auto {desgasteLlantas = arregloDosLlantas}
 
-trabajoZulu :: Mecanico
-trabajoZulu auto = auto {temperaturaAgua = 90}
+estabilidadDeTemperatura :: Mecanico
+estabilidadDeTemperatura auto = auto {temperaturaAgua = 90}
 
 personalZulu :: Mecanico
-personalZulu = personalLima.trabajoZulu
+personalZulu = personalLima.estabilidadDeTemperatura
 
