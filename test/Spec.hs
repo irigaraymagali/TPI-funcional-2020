@@ -4,6 +4,9 @@ import Taller
 auto1 :: Auto
 auto1 = Auto "AB808RD" [1,1,1,1] 1000 10 2010 
 
+auto1 :: Auto
+auto1 = Auto "AB808RD" [1,1,1,1] 1000 10 2010 
+
 auto1b :: Auto
 auto1b = Auto "AB808RD" [0,0,0,0] 1000 10 2000
 
@@ -52,9 +55,9 @@ main = hspec $ do
          auto2 `shouldNotSatisfy` esPeligroso
    describe "Auto necesita revision" $ do
       it "El auto1 necesita revision porque no se revisa desde antes de 2015" $ do
-         auto1 `shouldSatisfy `necesitaRevision   
+         auto1 `shouldSatisfy` necesitaRevision   
       it "El auto2 no necesita revision porque se revisó después de 2015 " $ do
-         auto2 `shouldNotSatisfy `necesitaRevision   
+         auto2 `shouldNotSatisfy` necesitaRevision   
    describe "Personal tecnico encargado de las reparaciones" $ do
       it "Alfa deja como esta a un auto con rpm menor que 2000" $ do
           personalAlfa auto1 `shouldBe` auto1
