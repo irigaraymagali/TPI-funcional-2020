@@ -20,7 +20,7 @@ data Auto = Auto {
 --PUNTO 1
 costoReparacion :: Auto -> Int
 costoReparacion auto  | patenteVieja auto = 12500
-                      | patenteNueva auto  && patenteEntreDJyNB (patente auto) = calculoPatental auto
+                      | patenteNueva auto  && (patenteEntreDJyNB.patente) auto = calculoPatental auto
                       | otherwise = 15000
 
 patenteVieja :: Auto -> Bool
@@ -32,7 +32,7 @@ patenteEntreDJyNB :: Patente -> Bool
 patenteEntreDJyNB patente = patente > "DJ" &&  patente < "NB"          
 
 calculoPatental :: Auto -> Int                     
-calculoPatental auto | last (patente auto) == 4 = 3000* length (patente auto)
+calculoPatental auto | (last.patente) auto == '4' = 3000* (length.patente) auto
                      | otherwise = 20000
             
 --PUNTO 2, parte 1
@@ -41,7 +41,7 @@ esPeligroso = (>0.5).head.desgasteLlantas
 
 --PUNTO 2, parte 2
 necesitaRevision :: Auto -> Bool
-necesitaRevision = (>=2015).anio.ultimoArreglo
+necesitaRevision = (<=2015).anio.ultimoArreglo
 
 --PUNTO 3, parte 1
 personalAlfa :: Mecanico

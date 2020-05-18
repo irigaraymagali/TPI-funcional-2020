@@ -2,37 +2,35 @@ import Test.Hspec
 import Taller
 
 auto1 :: Auto
-auto1 = Auto "AB808RD" [1,1,1,1] 1000 10 2010 
-
-auto1 :: Auto
-auto1 = Auto "AB808RD" [1,1,1,1] 1000 10 2010 
+auto1 = Auto "AB808RD" [1,1,1,1] 1000.10 10.00 (10, 10, 2010) 
 
 auto1b :: Auto
-auto1b = Auto "AB808RD" [0,0,0,0] 1000 10 2000
+auto1b = Auto "AB808RD" [0,0,0,0] 1000.10 10.00 (10, 10, 2000)
 
 auto2 :: Auto
-auto2 = Auto "EJS363" [0.2,0,0,] 5000 10 2020
+auto2 = Auto "EJS363" [0.2,0,0,0] 5000.10 10.00 (10, 10, 2020)
 
 auto2b :: Auto
-auto2b = Auto "EJS363" [0.2,0,0,0] 2000 10 2020
+auto2b = Auto "EJS363" [0.2,0,0,0] 2000.00 10.00 (10, 10, 2020)
 
 auto3 :: Auto 
-auto3 = Auto "EJS364" [0,0,0,0] 5000 10 2000
+auto3 = Auto "EJS364" [0,0,0,0] 5000.20 10.00 (10, 10, 2000)
 
 auto3b :: Auto
-auto3b = Auto "EJS364" [0,0,0,0] 2000 10 2000
+auto3b = Auto "EJS364" [0,0,0,0] 2000.00 10.00 (10, 10, 2000)
 
 auto4 :: Auto
-auto4 = Auto "ABC123" [0,0,0,0] 5000 10 2000
+auto4 = Auto "ABC123" [0,0,0,0] 5000.20 10.00 (10, 10, 2000)
 
 auto5 :: Auto
-auto5 = "MER702" [2,5,3,3] 3000 50 2018
+auto5 = Auto "MER702" [2,5,3,3] 3000.20 50.00 (10, 10, 2018)
 
 auto5b :: Auto
-auto5b :: "MER702" [0,0,3,3] 3000 50 2018
+auto5b = Auto "MER702" [0,0,3,3] 3000.20 50.00 (10, 10, 2018)
 
 auto5c :: Auto
-auto5c :: "MER702" [0,0,3,3] 3000 90 2018
+auto5c = Auto "MER702" [0,0,3,3] 3000.20 90 (10, 10, 2018)
+ 
 
 main :: IO()
 main = hspec $ do
@@ -62,7 +60,7 @@ main = hspec $ do
       it "Alfa deja como esta a un auto con rpm menor que 2000" $ do
           personalAlfa auto1 `shouldBe` auto1
       it "Alfa regula a 2000 vueltas si el auto regula a mas de 2000" $ do
-          personalAlfa auto2 `shouldBe` auto2b
+         personalAlfa auto2 `shouldBe` auto2b
       it "Bravo deja las llantas sin desgaste" $ do
           personalBravo auto1 `shouldBe` auto1b
       it "Charly deja las llantas sin desgaste y deja como esta a un auto con rpm menor que 2000" $ do
