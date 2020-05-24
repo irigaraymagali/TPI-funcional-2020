@@ -25,6 +25,7 @@ costoReparacion auto  | patenteVieja auto = 12500
 
 patenteVieja :: Auto -> Bool
 patenteVieja auto = (length.patente) auto == 7
+
 patenteNueva :: Auto -> Bool
 patenteNueva auto = (length.patente) auto == 6
 

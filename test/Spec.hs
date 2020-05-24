@@ -2,7 +2,7 @@ import Test.Hspec
 import Taller
 
 auto1 :: Auto
-auto1 = Auto "AB808RD" [1,1,1,1] 1000.10 10.00 (10, 10, 2010) 
+auto1 = (Auto "AB808RD" [1,1,1,1] 1000.10 10.00 (10, 10, 2010
 
 auto1b :: Auto
 auto1b = Auto "AB808RD" [0,0,0,0] 1000.10 10.00 (10, 10, 2000)
@@ -58,18 +58,18 @@ main = hspec $ do
          auto2 `shouldNotSatisfy` necesitaRevision   
    describe "Personal tecnico encargado de las reparaciones" $ do
       it "Alfa deja como esta a un auto con rpm menor que 2000" $ do
-          personalAlfa auto1 `shouldBe` auto1
+          (personalAlfa auto1) `shouldBe` auto1
       it "Alfa regula a 2000 vueltas si el auto regula a mas de 2000" $ do
          personalAlfa auto2 `shouldBe` auto2b
       it "Bravo deja las llantas sin desgaste" $ do
-          personalBravo auto1 `shouldBe` auto1b
+          (personalBravo auto1) `shouldBe` auto1b
       it "Charly deja las llantas sin desgaste y deja como esta a un auto con rpm menor que 2000" $ do
-          personalCharly auto1 `shouldBe` auto1b
+          (personalCharly auto1) `shouldBe` auto1b
       it "Charly deja las llantas sin desgaste y regula a 2000 vueltas si el auto regula a mas de 2000" $ do
-          personalCharly auto3 `shouldBe` auto3b
+          (personalCharly auto3) `shouldBe` auto3b
       it "Tango deja los autos como llegan" $ do
-         personalTango auto5 `shouldBe` auto5
+         (personalTango auto5) `shouldBe` auto5
       it "Lima deja las dos primeras llantas sin desgaste y las otras dos como estaban" $ do
-         personalLima auto5 `shouldBe` auto5b
+         (personalLima auto5) `shouldBe` auto5b
       it "Zulu deja las dos primeras llantas sin desgaste y la temperatura a 90" $ do
-         personalZulu auto5 `shouldBe` auto5c
+         (personalZulu auto5) `shouldBe` auto5c
