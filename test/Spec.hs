@@ -30,6 +30,12 @@ auto5b = Auto "MER702" [0,0,3,3] 3000.20 50.00 (10, 10, 2018)
 
 auto5c :: Auto
 auto5c = Auto "MER702" [0,0,3,3] 3000.20 90 (10, 10, 2018)
+
+auto6 :: Auto
+auto6 = Auto "ABC111" [0.1,0.2,1,2] 1000.00 10 (01, 10, 2020)
+
+auto7 :: Auto
+auto7 = Auto "ABA222" [0.1,0.2,2,3] 1000.00 10 (10,10,2010)
  
 
 main :: IO()
@@ -58,7 +64,7 @@ main = hspec $ do
          auto2 `shouldNotSatisfy` necesitaRevision   
    describe "Personal tecnico encargado de las reparaciones" $ do
       it "Alfa deja como esta a un auto con rpm menor que 2000" $ do
-          (personalAlfa auto1) `shouldBe` auto1
+         personalAlfa auto1 `shouldBe` auto1
       it "Alfa regula a 2000 vueltas si el auto regula a mas de 2000" $ do
          personalAlfa auto2 `shouldBe` auto2b
       it "Bravo deja las llantas sin desgaste" $ do
@@ -73,3 +79,6 @@ main = hspec $ do
          (personalLima auto5) `shouldBe` auto5b
       it "Zulu deja las dos primeras llantas sin desgaste y la temperatura a 90" $ do
          (personalZulu auto5) `shouldBe` auto5c
+   describe "Ordenamiento TOC de autos" $ do
+      it "Una lista con dos autos donde el primero tiene una cantidad de desgaste impar y el segundo par está ordenada" $ do
+         [auto6, auto1] `shouldNotSatisfy` autosOrdenados 

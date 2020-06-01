@@ -79,11 +79,15 @@ estaOrdenadoCriterio condicion (x:xs) |condicion x = estaOrdenadoCriterio (not.c
 autosOrdenados = estaOrdenadoCriterio odd
 
 --PUNTO 5
-mecanicos = [personalAlfa,personalBravo,personalCharly,personalTango,personalLima,personalZulu]
 
-arreglosTecnicos auto = foldl auto  mecanicos
+mecanicos = [personalAlfa,personalBravo,personalCharly,personalTango,personalLima,personalZulu]
+arreglosTecnicos :: Mecanico
+arreglosTecnicos auto = foldr ($) auto mecanicos
+
+--cambioFecha :: Mecanico
 cambioFecha auto fecha = auto {ultimoArreglo = fecha}
 
+ordenDeReparacion = cambioFecha . arreglosTecnicos
 --PUNTO 6, parte 1
 --tecnicosLoDejanEnCond :: [Auto] -> [Auto] 
 tecnicosLoDejanEnCond = filter autoEnCondiciiones 
