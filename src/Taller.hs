@@ -17,6 +17,7 @@ data Auto = Auto {
  ultimoArreglo :: Fecha
 } deriving Show
 
+
 --PUNTO 1
 costoReparacion :: Auto -> Int
 costoReparacion auto  | patenteVieja auto = 12500
@@ -60,14 +61,25 @@ personalTango :: Mecanico
 personalTango auto = auto
 
 arregloDosLlantas :: [Desgaste] -> [Desgaste]
-arregloDosLlantas = [0,0,_,_]
+arregloDosLlantas [_,_,c,d]= [0,0,c,d]
 
 personalLima :: Mecanico
-personalLima auto = auto {desgasteLlantas = arregloDosLlantas}
+personalLima auto = auto {desgasteLlantas = (arregloDosLlantas.desgasteLlantas)auto} 
 
 estabilidadDeTemperatura :: Mecanico
-estabilidadDeTemperatura auto = auto {temperaturaAgua = 90}
+estabilidadDeTemperatura auto = auto {temperaturaAgua = 90} 
 
 personalZulu :: Mecanico
 personalZulu = personalLima.estabilidadDeTemperatura
 
+--PUNTO 4
+estaOrdenadoCriterio _ [] = True
+estaOrdenadoCriterio condicion (x:xs) |condicion x = estaOrdenadoCriterio (not.condicion) xs
+
+autosOrdenados = estaOrdenadoCriterio odd
+
+--PUNTO 5
+mecanicos = [personalAlfa,personalBravo,personalCharly,personalTango,personalLima,personalZulu]
+
+arreglosTecnicos auto = foldl auto  mecanicos
+cambioFecha auto fecha = auto {ultimoArreglo = fecha}

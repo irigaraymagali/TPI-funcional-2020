@@ -2,7 +2,7 @@ import Test.Hspec
 import Taller
 
 auto1 :: Auto
-auto1 = (Auto "AB808RD" [1,1,1,1] 1000.10 10.00 (10, 10, 2010
+auto1 = Auto "AB808RD" [1,1,1,1] 1000.10 10.00 (10, 10, 2010)
 
 auto1b :: Auto
 auto1b = Auto "AB808RD" [0,0,0,0] 1000.10 10.00 (10, 10, 2000)
