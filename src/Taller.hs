@@ -83,3 +83,12 @@ mecanicos = [personalAlfa,personalBravo,personalCharly,personalTango,personalLim
 
 arreglosTecnicos auto = foldl auto  mecanicos
 cambioFecha auto fecha = auto {ultimoArreglo = fecha}
+
+--PUNTO 6, parte 1
+tecnicosLoDejanEnCond :: [Auto] -> [Auto] 
+tecnicosLoDejanEnCond = filter autoEnCondiciiones 
+
+autoEnCondiciiones :: Auto -> Bool
+autoEnCondiciiones = not.esPeligroso
+
+--PUNTO 6, parte 2
