@@ -85,10 +85,38 @@ arreglosTecnicos auto = foldl auto  mecanicos
 cambioFecha auto fecha = auto {ultimoArreglo = fecha}
 
 --PUNTO 6, parte 1
-tecnicosLoDejanEnCond :: [Auto] -> [Auto] 
+--tecnicosLoDejanEnCond :: [Auto] -> [Auto] 
 tecnicosLoDejanEnCond = filter autoEnCondiciiones 
 
 autoEnCondiciiones :: Auto -> Bool
 autoEnCondiciiones = not.esPeligroso
 
 --PUNTO 6, parte 2
+
+--PUNTO 7, parte 1
+--Considerando una lista de técnicos  infinita, ¿podríamos obtener el primer técnico que deja el auto
+--en condiciones? Muestre un ejemplo y justifique. 
+--Si, se puede hacer ya que se utiliza lazy evaluation lo cual hace que antes de tener que obtener la lista 
+--completa (que seria imposible porque es infinita) opera con la funcion head, lo cual nos devuelve el primer elemento.
+
+--primeroEnDejarloEnCond :: [Auto] -> Auto
+primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
+
+--PUNTO 7, parte 2
+
+
+ --Tecnicos y autos infinitos
+tecnicosInfinitos = personalZulu:tecnicosInfinitos
+ 
+autosInfinitos :: [Auto]
+autosInfinitos = autosInfinitos' 0
+ 
+autosInfinitos' :: Float -> [Auto]
+autosInfinitos' n = Auto {
+ patente = "AAA000",
+ desgasteLlantas = [n, 0, 0, 0.3],
+ rpm = 1500 + n,
+ temperaturaAgua = 90,
+ ultimoArreglo = (20, 1, 2013)
+} : autosInfinitos' (n + 1)
+
