@@ -108,6 +108,17 @@ autoEnCondiciiones :: Auto -> Bool
 autoEnCondiciiones = not.esPeligroso
 
 --PUNTO 6, parte 2
+listaDeAutosFiltrados :: [Auto] -> [Auto]
+listaDeAutosFiltrados listaAutos = filter necesitaRevision listaAutos
+
+costoDeAutos :: [Auto] -> [Int]
+costoDeAutos listaAutos = map costoReparacion listaAutos
+
+sumaDeCostos :: [Int] -> Int
+sumaDeCostos listaCostos = foldl1 (+) listaCostos
+
+sumaDeCostosDeAutosFiltrados :: [Auto] -> Int
+sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
 
 
 --PUNTO 7, parte 1
@@ -121,7 +132,11 @@ autoEnCondiciiones = not.esPeligroso
 primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
 
 --PUNTO 7, parte 2
+-- Dada una lista infinita de autos, saber cual es el costo total de reparar todos los que necesiten revision
+-- ¿podríamos tener una lista infinita de autos? Muestre un ejemplo y justifique
 
+-- No, no podríamos porque al tener una lista infinita de autos, va sumando de forma interminable
+-- los costos de los que necesitan revision y nunca cortaría con la suma.
  --Tecnicos y autos infinitos
 tecnicosInfinitos = personalZulu:tecnicosInfinitos
  
