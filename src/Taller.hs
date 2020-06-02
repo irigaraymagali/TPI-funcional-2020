@@ -73,31 +73,45 @@ personalZulu :: Mecanico
 personalZulu = personalLima.estabilidadDeTemperatura
 
 --PUNTO 4
+estaOrdenadoCriterio :: (t -> Bool) -> [t] -> Bool
 estaOrdenadoCriterio _ [] = True
 estaOrdenadoCriterio condicion (x:xs) |condicion x = estaOrdenadoCriterio (not.condicion) xs
 
-autosOrdenados = estaOrdenadoCriterio odd
+ordenamientoToc:: [Desgaste] -> Bool
+ordenamientoToc = estaOrdenadoCriterio (odd.round)
+
+listaCantidadDesgaste :: [Auto] -> [Desgaste]
+listaCantidadDesgaste listaAutos = map cantidadDesgaste listaAutos
+cantidadDesgaste :: Auto -> Desgaste
+cantidadDesgaste auto = foldl1 (+) (desgasteLlantas auto) * 10
+
+estanOrdenados :: [Auto] -> Bool
+estanOrdenados = ordenamientoToc.listaCantidadDesgaste
 
 --PUNTO 5
-
 mecanicos = [personalAlfa,personalBravo,personalCharly,personalTango,personalLima,personalZulu]
 arreglosTecnicos :: Mecanico
 arreglosTecnicos auto = foldr ($) auto mecanicos
 
---cambioFecha :: Mecanico
+cambioFecha :: Auto -> Fecha -> Auto
 cambioFecha auto fecha = auto {ultimoArreglo = fecha}
 
+ordenDeReparacion :: Auto -> Fecha -> Auto
 ordenDeReparacion = cambioFecha . arreglosTecnicos
+
 --PUNTO 6, parte 1
 --tecnicosLoDejanEnCond :: [Auto] -> [Auto] 
 tecnicosLoDejanEnCond = filter autoEnCondiciiones 
+
 
 autoEnCondiciiones :: Auto -> Bool
 autoEnCondiciiones = not.esPeligroso
 
 --PUNTO 6, parte 2
 
+
 --PUNTO 7, parte 1
+
 --Considerando una lista de técnicos  infinita, ¿podríamos obtener el primer técnico que deja el auto
 --en condiciones? Muestre un ejemplo y justifique. 
 --Si, se puede hacer ya que se utiliza lazy evaluation lo cual hace que antes de tener que obtener la lista 
@@ -107,7 +121,6 @@ autoEnCondiciiones = not.esPeligroso
 primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
 
 --PUNTO 7, parte 2
-
 
  --Tecnicos y autos infinitos
 tecnicosInfinitos = personalZulu:tecnicosInfinitos
