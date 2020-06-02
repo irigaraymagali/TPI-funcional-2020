@@ -7,6 +7,9 @@ auto1 = Auto "AB808RD" [1,1,1,1] 1000.10 10.00 (10, 10, 2010)
 auto1b :: Auto
 auto1b = Auto "AB808RD" [0,0,0,0] 1000.10 10.00 (10, 10, 2000)
 
+auto1c :: Auto
+auto1c = Auto "AB808RD" [0.0,0.0,0.0,0.0] 1000.1 90.0 (1,6,2020)
+
 auto2 :: Auto
 auto2 = Auto "EJS363" [0.2,0,0,0] 5000.10 10.00 (10, 10, 2020)
 
@@ -81,4 +84,15 @@ main = hspec $ do
          (personalZulu auto5) `shouldBe` auto5c
    describe "Ordenamiento TOC de autos" $ do
       it "Una lista con dos autos donde el primero tiene una cantidad de desgaste impar y el segundo par está ordenada" $ do
-         [auto6, auto1] `shouldNotSatisfy` autosOrdenados 
+         [auto6, auto1] `shouldSatisfy` estanOrdenados 
+      it "Una lista con dos autos donde ambos tienen una cantidad de desgaste impar no está ordenada" $ do
+         [auto6, auto7] `shouldNotSatisfy` estanOrdenados 
+      it "Una lista con dos autos donde ambos tienen una cantidad de desgaste par no está ordenada" $ do
+         [auto1, auto2] `shouldNotSatisfy` estanOrdenados 
+      it "Una lista con un solo auto que tiene una cantidad de desgaste impar está ordenada" $ do
+         [auto6] `shouldSatisfy` estanOrdenados 
+      it "Una lista con un solo auto que tiene una cantidad de desgaste par no está ordenada" $ do
+         [auto1] `shouldNotSatisfy` estanOrdenados 
+   describe "Orden de reparación" $ do
+      it "Un auto que pasa por la lista de mecanicos y se le actualiza su fecha" $ do
+       ordenDeReparacion auto1 (01,06,2020) `shouldBe` auto1c

@@ -100,12 +100,12 @@ ordenDeReparacion :: Auto -> Fecha -> Auto
 ordenDeReparacion = cambioFecha . arreglosTecnicos
 
 --PUNTO 6, parte 1
---tecnicosLoDejanEnCond :: [Auto] -> [Auto] 
+--tecnicosLoDejanEnCond :: [Mecanico] -> [Mecanico] 
 tecnicosLoDejanEnCond = filter autoEnCondiciiones 
-
 
 autoEnCondiciiones :: Auto -> Bool
 autoEnCondiciiones = not.esPeligroso
+
 
 --PUNTO 6, parte 2
 listaDeAutosFiltrados :: [Auto] -> [Auto]
