@@ -76,14 +76,18 @@ personalZulu = personalLima.estabilidadDeTemperatura
 estaOrdenadoCriterio :: (t -> Bool) -> [t] -> Bool
 estaOrdenadoCriterio _ [] = True
 estaOrdenadoCriterio condicion (x:xs) |condicion x = estaOrdenadoCriterio (not.condicion) xs
+                                      | otherwise = False
 
-ordenamientoToc:: [Desgaste] -> Bool
-ordenamientoToc = estaOrdenadoCriterio (odd.round)
+ordenamientoToc :: [Desgaste] -> Bool
+ordenamientoToc = estaOrdenadoCriterio odd
 
 listaCantidadDesgaste :: [Auto] -> [Desgaste]
 listaCantidadDesgaste listaAutos = map cantidadDesgaste listaAutos
 cantidadDesgaste :: Auto -> Desgaste
-cantidadDesgaste auto = foldl1 (+) (desgasteLlantas auto) * 10
+cantidadDesgaste auto = round (sumatoriaDesgasteLlantas *10)
+sumatoriaDesgasteLlantas :: Auto -> Int
+sumatoriaDesgasteLlantas auto = sum (desgasteLlantas auto)
+ 
 
 estanOrdenados :: [Auto] -> Bool
 estanOrdenados = ordenamientoToc.listaCantidadDesgaste
@@ -100,11 +104,10 @@ ordenDeReparacion :: Auto -> Fecha -> Auto
 ordenDeReparacion = cambioFecha . arreglosTecnicos
 
 --PUNTO 6, parte 1
---tecnicosLoDejanEnCond :: [Mecanico] -> [Mecanico] 
-tecnicosLoDejanEnCond = filter autoEnCondiciiones 
-
-autoEnCondiciiones :: Auto -> Bool
-autoEnCondiciiones = not.esPeligroso
+tecnicosLoDejanEnCond :: [Mecanico] -> [Mecanico] 
+tecnicosLoDejanEnCond listaMecanicos = filter autoEnCondiciones listaMecanicos 
+autoEnCondiciones :: Mecanico -> Auto -> Bool
+autoEnCondiciones mecanico = not.esPeligroso.mecanico
 
 
 --PUNTO 6, parte 2
@@ -128,8 +131,8 @@ sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
 --Si, se puede hacer ya que se utiliza lazy evaluation lo cual hace que antes de tener que obtener la lista 
 --completa (que seria imposible porque es infinita) opera con la funcion head, lo cual nos devuelve el primer elemento.
 
---primeroEnDejarloEnCond :: [Auto] -> Auto
-primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
+primeroEnDejarloEnCond :: [Auto] -> Auto
+primeroEnDejarloEnCond listaMecanicos = head.tecnicosLoDejanEnCond listaMecanicos
 
 --PUNTO 7, parte 2
 -- Dada una lista infinita de autos, saber cual es el costo total de reparar todos los que necesiten revision
@@ -138,6 +141,7 @@ primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
 -- No, no podríamos porque al tener una lista infinita de autos, va sumando de forma interminable
 -- los costos de los que necesitan revision y nunca cortaría con la suma.
  --Tecnicos y autos infinitos
+
 tecnicosInfinitos = personalZulu:tecnicosInfinitos
  
 autosInfinitos :: [Auto]
