@@ -84,9 +84,9 @@ ordenamientoToc = estaOrdenadoCriterio odd
 listaCantidadDesgaste :: [Auto] -> [Desgaste]
 listaCantidadDesgaste listaAutos = map cantidadDesgaste listaAutos
 cantidadDesgaste :: Auto -> Desgaste
-cantidadDesgaste auto = round (sumatoriaDesgasteLlantas *10)
+cantidadDesgaste auto = sumatoriaDesgasteLlantas *10
 sumatoriaDesgasteLlantas :: Auto -> Int
-sumatoriaDesgasteLlantas auto = sum (desgasteLlantas auto)
+sumatoriaDesgasteLlantas auto = round (sum (desgasteLlantas auto))
  
 
 estanOrdenados :: [Auto] -> Bool
@@ -105,7 +105,7 @@ ordenDeReparacion = cambioFecha . arreglosTecnicos
 
 --PUNTO 6, parte 1
 tecnicosLoDejanEnCond :: [Mecanico] -> [Mecanico] 
-tecnicosLoDejanEnCond listaMecanicos = filter autoEnCondiciones listaMecanicos 
+tecnicosLoDejanEnCond listaMecanicos = filter autoEnCondiciones listaMecanicos
 autoEnCondiciones :: Mecanico -> Auto -> Bool
 autoEnCondiciones mecanico = not.esPeligroso.mecanico
 
