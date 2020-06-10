@@ -78,15 +78,14 @@ estaOrdenadoCriterio _ [] = True
 estaOrdenadoCriterio condicion (x:xs) |condicion x = estaOrdenadoCriterio (not.condicion) xs
                                       | otherwise = False
 
-ordenamientoToc :: [Desgaste] -> Bool
+ordenamientoToc :: [Int] -> Bool
 ordenamientoToc = estaOrdenadoCriterio odd
 
-listaCantidadDesgaste :: [Auto] -> [Desgaste]
-listaCantidadDesgaste listaAutos = map cantidadDesgaste listaAutos
-cantidadDesgaste :: Auto -> Desgaste
-cantidadDesgaste auto = sumatoriaDesgasteLlantas *10
+listaCantidadDesgaste :: [Auto] -> [Int]
+listaCantidadDesgaste listaAutos = map sumatoriaDesgasteLlantas listaAutos
+
 sumatoriaDesgasteLlantas :: Auto -> Int
-sumatoriaDesgasteLlantas auto = round (sum (desgasteLlantas auto))
+sumatoriaDesgasteLlantas auto = round (sum (desgasteLlantas auto) * 10)
  
 
 estanOrdenados :: [Auto] -> Bool
@@ -104,24 +103,26 @@ ordenDeReparacion :: Auto -> Fecha -> Auto
 ordenDeReparacion = cambioFecha . arreglosTecnicos
 
 --PUNTO 6, parte 1
-tecnicosLoDejanEnCond :: [Mecanico] -> [Mecanico] 
-tecnicosLoDejanEnCond listaMecanicos = filter autoEnCondiciones listaMecanicos
-autoEnCondiciones :: Mecanico -> Auto -> Bool
-autoEnCondiciones mecanico = not.esPeligroso.mecanico
+tecnicosLoDejanEnCond :: Auto -> [Mecanico] -> [Mecanico] 
+tecnicosLoDejanEnCond auto listaMecanicos  = filter (autoEnCondiciones auto) listaMecanicos
+
+autoEnCondiciones :: Auto -> Mecanico ->  Bool
+autoEnCondiciones auto mecanico  = (not.esPeligroso.mecanico) auto
+
 
 
 --PUNTO 6, parte 2
-listaDeAutosFiltrados :: [Auto] -> [Auto]
-listaDeAutosFiltrados listaAutos = filter necesitaRevision listaAutos
+-- listaDeAutosFiltrados :: [Auto] -> [Auto]
+-- listaDeAutosFiltrados listaAutos = filter necesitaRevision listaAutos
 
-costoDeAutos :: [Auto] -> [Int]
-costoDeAutos listaAutos = map costoReparacion listaAutos
+-- costoDeAutos :: [Auto] -> [Int]
+-- costoDeAutos listaAutos = map costoReparacion listaAutos
 
-sumaDeCostos :: [Int] -> Int
-sumaDeCostos listaCostos = foldl1 (+) listaCostos
+-- sumaDeCostos :: [Int] -> Int
+-- sumaDeCostos listaCostos = foldl1 (+) listaCostos
 
-sumaDeCostosDeAutosFiltrados :: [Auto] -> Int
-sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
+-- sumaDeCostosDeAutosFiltrados :: [Auto] -> Int
+-- sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
 
 
 --PUNTO 7, parte 1
@@ -131,8 +132,8 @@ sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
 --Si, se puede hacer ya que se utiliza lazy evaluation lo cual hace que antes de tener que obtener la lista 
 --completa (que seria imposible porque es infinita) opera con la funcion head, lo cual nos devuelve el primer elemento.
 
-primeroEnDejarloEnCond :: [Auto] -> Auto
-primeroEnDejarloEnCond listaMecanicos = head.tecnicosLoDejanEnCond listaMecanicos
+--  primeroEnDejarloEnCond :: [Auto] -> Auto
+--  primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
 
 --PUNTO 7, parte 2
 -- Dada una lista infinita de autos, saber cual es el costo total de reparar todos los que necesiten revision
