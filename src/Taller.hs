@@ -15,7 +15,7 @@ data Auto = Auto {
  rpm :: Float,
  temperaturaAgua :: Float,
  ultimoArreglo :: Fecha
-} deriving Show
+} deriving (Show,Eq)
 
 
 --PUNTO 1
@@ -85,9 +85,8 @@ listaCantidadDesgaste :: [Auto] -> [Int]
 listaCantidadDesgaste listaAutos = map sumatoriaDesgasteLlantas listaAutos
 
 sumatoriaDesgasteLlantas :: Auto -> Int
-sumatoriaDesgasteLlantas auto = round (sum (desgasteLlantas auto) * 10)
+sumatoriaDesgasteLlantas auto = round (sum (desgasteLlantas auto) * 10) 
  
-
 estanOrdenados :: [Auto] -> Bool
 estanOrdenados = ordenamientoToc.listaCantidadDesgaste
 
@@ -109,7 +108,9 @@ tecnicosLoDejanEnCond auto listaMecanicos  = filter (autoEnCondiciones auto) lis
 autoEnCondiciones :: Auto -> Mecanico ->  Bool
 autoEnCondiciones auto mecanico  = (not.esPeligroso.mecanico) auto
 
-
+--funcion para luego utilizar en los test
+cantTecnicosLoDejanEnCond :: Auto -> [Mecanico] -> Int
+cantTecnicosLoDejanEnCond auto listaMecanicos = length (tecnicosLoDejanEnCond auto listaMecanicos)
 
 --PUNTO 6, parte 2
 listaDeAutosFiltrados :: [Auto] -> [Auto]
@@ -126,13 +127,12 @@ sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
 
 
 --PUNTO 7, parte 1
-
 --Considerando una lista de técnicos  infinita, ¿podríamos obtener el primer técnico que deja el auto
 --en condiciones? Muestre un ejemplo y justifique. 
 --Si, se puede hacer ya que se utiliza lazy evaluation lo cual hace que antes de tener que obtener la lista 
 --completa (que seria imposible porque es infinita) opera con la funcion head, lo cual nos devuelve el primer elemento.
 
- primeroEnDejarloEnCond :: [Auto] -> Auto
+ primeroEnDejarloEnCond :: Auto -> [Mecanico] -> Mecanico
  primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
 
 --PUNTO 7, parte 2

@@ -5,10 +5,10 @@ auto1 :: Auto
 auto1 = Auto "AB808RD" [1,1,1,1] 1000.10 10.00 (10, 10, 2010)
 
 auto1b :: Auto
-auto1b = Auto "AB808RD" [0,0,0,0] 1000.10 10.00 (10, 10, 2000)
+auto1b = Auto "AB808RD" [0,0,0,0] 1000.10 10.00 (10, 10, 2010)
 
 auto1c :: Auto
-auto1c = Auto "AB808RD" [0.0,0.0,0.0,0.0] 1000.1 90.0 (1,6,2020)
+auto1c = Auto "AB808RD" [0.0,0.0,0.0,0.0] 1000.1 90.0 (1,6,2010)
 
 auto2 :: Auto
 auto2 = Auto "EJS363" [0.2,0,0,0] 5000.10 10.00 (10, 10, 2020)
@@ -39,6 +39,19 @@ auto6 = Auto "ABC111" [0.1,0.2,1,2] 1000.00 10 (01, 10, 2020)
 
 auto7 :: Auto
 auto7 = Auto "ABA222" [0.1,0.2,2,3] 1000.00 10 (10,10,2010)
+
+auto7b :: Auto
+auto7b = Auto "ABA222" [0,0,0,0] 1000 90 (10,10,2020)
+
+listaMecanicos1 :: [Mecanico]
+listaMecanicos1 = [personalBravo, personalCharly, personalLima, personalZulu]
+
+listaMecanicos2 :: [Mecanico]
+listaMecanicos2 = [personalAlfa,personalTango]
+
+listaMecanicos3 :: [Mecanico]
+listaMecanicos3 = [personalAlfa, personalBravo, personalZulu]
+
  
 
 main :: IO()
@@ -95,4 +108,11 @@ main = hspec $ do
          [auto1] `shouldNotSatisfy` estanOrdenados 
    describe "Orden de reparación" $ do
       it "Un auto que pasa por la lista de mecanicos y se le actualiza su fecha" $ do
-       ordenDeReparacion auto1 (01,06,2020) `shouldBe` auto1c
+       ordenDeReparacion auto7 (10,10,2020) `shouldBe` auto7b
+   describe "Técnicos que dejan el auto en condiciones" $ do
+      it "Todos los mecanicos que dejan el auto sin ser peligroso dejan el auto en condiciones" $ do 
+         cantTecnicosLoDejanEnCond auto1 listaMecanicos1 `shouldBe` 4
+      it "Ningun mecanico que deje el auto peligroso deja el auto en condiciones" $ do
+        cantTecnicosLoDejanEnCond auto1 listaMecanicos2 `shouldBe` 0
+      it "Los mecanicos de la lista que dejan el auto sin ser peligroso dejan el auto en condiciones" $ do
+        cantTecnicosLoDejanEnCond auto1 listaMecanicos3 `shouldBe` 2
