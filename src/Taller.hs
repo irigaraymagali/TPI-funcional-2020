@@ -112,17 +112,17 @@ autoEnCondiciones auto mecanico  = (not.esPeligroso.mecanico) auto
 
 
 --PUNTO 6, parte 2
--- listaDeAutosFiltrados :: [Auto] -> [Auto]
--- listaDeAutosFiltrados listaAutos = filter necesitaRevision listaAutos
+listaDeAutosFiltrados :: [Auto] -> [Auto]
+listaDeAutosFiltrados listaAutos = filter necesitaRevision listaAutos
 
--- costoDeAutos :: [Auto] -> [Int]
--- costoDeAutos listaAutos = map costoReparacion listaAutos
+costoDeAutos :: [Auto] -> [Int]
+costoDeAutos listaAutos = map costoReparacion listaAutos
 
--- sumaDeCostos :: [Int] -> Int
--- sumaDeCostos listaCostos = foldl1 (+) listaCostos
+sumaDeCostos :: [Int] -> Int
+sumaDeCostos listaCostos = foldl1 (+) listaCostos
 
--- sumaDeCostosDeAutosFiltrados :: [Auto] -> Int
--- sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
+sumaDeCostosDeAutosFiltrados :: [Auto] -> Int
+sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
 
 
 --PUNTO 7, parte 1
@@ -132,8 +132,8 @@ autoEnCondiciones auto mecanico  = (not.esPeligroso.mecanico) auto
 --Si, se puede hacer ya que se utiliza lazy evaluation lo cual hace que antes de tener que obtener la lista 
 --completa (que seria imposible porque es infinita) opera con la funcion head, lo cual nos devuelve el primer elemento.
 
---  primeroEnDejarloEnCond :: [Auto] -> Auto
---  primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
+ primeroEnDejarloEnCond :: [Auto] -> Auto
+ primeroEnDejarloEnCond = head.tecnicosLoDejanEnCond
 
 --PUNTO 7, parte 2
 -- Dada una lista infinita de autos, saber cual es el costo total de reparar todos los que necesiten revision
