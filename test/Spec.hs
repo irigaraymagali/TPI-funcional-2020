@@ -116,3 +116,10 @@ main = hspec $ do
         cantTecnicosLoDejanEnCond auto1 listaMecanicos2 `shouldBe` 0
       it "Los mecanicos de la lista que dejan el auto sin ser peligroso dejan el auto en condiciones" $ do
         cantTecnicosLoDejanEnCond auto1 listaMecanicos3 `shouldBe` 2
+    describe "Precio total de la reparación de los autos"
+      it "El costo total sumado de los autos de la lista es 37500"
+         sumaDeCostosDeAutosFiltrados listaAutos1 `shouldBe` 37500
+      it "El costo total sumado de los autos de la lista es 0"
+         sumaDeCostosDeAutosFiltrados listaAutos2 `shouldBe` 0
+      it "El costo total sumado de los autos de la lista es 48000"
+         sumaDeCostosDeAutosFiltrados listaAutos3 `shouldBe` 48000
