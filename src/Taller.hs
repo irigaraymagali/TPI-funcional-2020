@@ -123,7 +123,7 @@ sumaDeCostos :: [Int] -> Int
 sumaDeCostos listaCostos = foldl1 (+) listaCostos
 
 sumaDeCostosDeAutosFiltrados :: [Auto] -> Int
-sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
+sumaDeCostosDeAutosFiltrados = sumaDeCostos.costoDeAutos.listaDeAutosFiltrados
 
 
 --PUNTO 7, parte 1
@@ -141,6 +141,10 @@ sumaDeCostosDeAutosFiltrados = sumaDeCostos.listaDeAutosFiltrados
 
 -- No, no podríamos porque al tener una lista infinita de autos, va sumando de forma interminable
 -- los costos de los que necesitan revision y nunca cortaría con la suma.
+
+autosFiltradosDeLaListaInfinita :: [Auto] -> [Auto]
+autosFiltradosDeLaListaInfinita listaAutos = take 3 (filter necesitaRevision listaAutos)
+ 
  --Tecnicos y autos infinitos
 
 tecnicosInfinitos = personalZulu:tecnicosInfinitos
